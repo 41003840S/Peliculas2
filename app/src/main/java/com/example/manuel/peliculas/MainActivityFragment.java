@@ -3,6 +3,9 @@ package com.example.manuel.peliculas;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -31,8 +34,7 @@ public class MainActivityFragment extends Fragment {
 
         listaPeliculas = (ListView) fragment.findViewById(R.id.listView);              //Enlazamos el listView
 
-        String data[] = {"Lun 26/10 - Soleado", "Mar 27/10 - Niebla", "Mier 26/10 - Nublado", "Jue 26/10 - Lluvioso",
-                "Lun 26/10 - Soleado", "Sab 26/10 - Parcialmente nublado", "Dom 26/10 - Soleado"};
+        String data[] = {"Peli1", "Peli2", "Peli3", "Peli4", "Peli5", "Peli6", "Peli7", "Peli8", "Peli9", "Peli10"};
 
         items = new ArrayList(Arrays.asList(data));                                 //Añadimos el array de Strings a un ArrayList
         adapter = new ArrayAdapter<String>(getContext(),                            //Enlazamos con el adaptador los datos con el ListView
@@ -46,6 +48,38 @@ public class MainActivityFragment extends Fragment {
             }
         });
         return fragment;
+    }
+
+    //Creamos el onCreate y el OptionItemSelect del menu que hemos creado para el fragment en RES--> MENU, para añadir el item (refresh)
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.menu_fragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.action_movies) {
+            refresh();                                      //Al presionar el item refresh invoca el metodo refresh
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void refresh() {
+     //   OwmApiClient apiClient = new OwmApiClient();
+     //   apiClient.updateForecasts(adapter);
     }
 
 }
