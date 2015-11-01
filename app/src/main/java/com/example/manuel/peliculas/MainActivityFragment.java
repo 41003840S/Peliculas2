@@ -22,8 +22,11 @@ public class MainActivityFragment extends Fragment {
     ArrayList items;
     ArrayAdapter adapter;
 
-    public MainActivityFragment() {
-    }
+    /*@Override
+    public void onStart() {
+        super.onStart();
+        muestraPopulares();
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,16 +44,16 @@ public class MainActivityFragment extends Fragment {
                 R.layout.filas_peliculas, R.id.tv_row, items);
         listaPeliculas.setAdapter(adapter);                                            //Seteamos el ListView con el adaptador
 
-        listaPeliculas.setOnLongClickListener(new View.OnLongClickListener() {
+       /* listaPeliculas.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {                                 //Crea un Listener para que con pulsacion prolongada haga algo
                 return false;
             }
-        });
+        });*/
         return fragment;
     }
 
-    //Creamos el onCreate y el OptionItemSelect del menu que hemos creado para el fragment en RES--> MENU, para añadir el item (refresh)
+    //Creamos el onCreate y el OptionItemSelect del menu que hemos creado para el fragment en RES--> MENU, para añadir el item (muestraPopulares)
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -70,16 +73,26 @@ public class MainActivityFragment extends Fragment {
             return true;
         }
 
-        if (id == R.id.action_movies) {
-            refresh();                                      //Al presionar el item refresh invoca el metodo refresh
+        if (id == R.id.peliculas_populares) {
+            muestraPopulares();                                      //Al presionar el item muestraPopulares invoca el metodo muestraPopulares
+            return true;
+        }
+
+        if (id == R.id.peliculas_top) {
+            muestraTop();                                      //Al presionar el item muestraPopulares invoca el metodo muestraPopulares
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void refresh() {
-     //   OwmApiClient apiClient = new OwmApiClient();
-     //   apiClient.updateForecasts(adapter);
+    private void muestraPopulares() {
+        PopularMovies populares = new PopularMovies();
+        populares.updateMovies(adapter);
+    }
+
+    private void muestraTop() {
+        TopRatedMovies mvaloradas = new TopRatedMovies();
+        mvaloradas.updateMovies(adapter);
     }
 
 }
