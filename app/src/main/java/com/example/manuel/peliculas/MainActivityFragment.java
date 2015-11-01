@@ -13,20 +13,18 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class MainActivityFragment extends Fragment {
 
     ListView listaPeliculas;
     ArrayList items;
     ArrayAdapter adapter;
 
-    /*@Override
+    @Override
     public void onStart() {
         super.onStart();
         muestraPopulares();
-    }*/
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,12 +72,12 @@ public class MainActivityFragment extends Fragment {
         }
 
         if (id == R.id.peliculas_populares) {
-            muestraPopulares();                                      //Al presionar el item muestraPopulares invoca el metodo muestraPopulares
+            muestraPopulares();                                //Al presionar el item invoca el metodo muestraPopulares
             return true;
         }
 
         if (id == R.id.peliculas_top) {
-            muestraTop();                                      //Al presionar el item muestraPopulares invoca el metodo muestraPopulares
+            muestraTop();                                      //Al presionar el item invoca el metodo muestraTop
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -1,10 +1,13 @@
 package com.example.manuel.peliculas;
 
 
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import com.example.manuel.peliculas.topratedmovies.FilmServiceTopRated;
 import com.example.manuel.peliculas.topratedmovies.Result;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
@@ -46,9 +49,11 @@ public class TopRatedMovies {
                 ArrayList<String> peliculas = new ArrayList<>();
                 FilmServiceTopRated film = response.body();
                 for (Result list : film.getResults()) {
-                    String titulo = list.getTitle();
-                    Double popularidad = list.getPopularity();
-                    peliculas.add(titulo + ": " + String.valueOf(popularidad)+"Top Rated"); //Se meten en un array list para despues mostrarlos todos de una vez y no ir refrescando una a una
+                    //String titulo = list.getTitle();
+                    //Double popularidad = list.getPopularity();
+                    //peliculas.add(titulo + ": " + String.valueOf(popularidad)+"Top Rated"); //Se meten en un array list para despues mostrarlos todos de una vez y no ir refrescando una a una
+                    String filmDescritionString = getFilmDescrition(list);
+                    peliculas.add(filmDescritionString);
                 }
 
                 adapter.clear();
@@ -57,25 +62,26 @@ public class TopRatedMovies {
 
             @Override
             public void onFailure(Throwable t) {
-                // Log.e("Update Films", Arrays.toString(t.getStackTrace()));
+                 Log.e("Update Films", Arrays.toString(t.getStackTrace()));
             }
         });
 
     }
 
-    /*private String getForecastString(List list) {
-        Long dt = list.getDt();
-        java.util.Date date = new java.util.Date(dt * 1000);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("E d/M");
-        String dateString = dateFormat.format(date);
+    private String getFilmDescrition (Result list) {
+        String titulo = list.getTitle();
+        String sinopsis = list.getOverview();
+        boolean adulto = list.getAdult();
+        String adulto1;
+        if(adulto){
+            adulto1 = "+ 18 years";
+        }else{
+            adulto1 = "- 18 years";
+        }
+        //double mediaVotos = (double)list.getVoteAverage();
+        //int votos = list.getVoteCount();
 
-        String description = list.getWeather().get(0).getDescription();
-
-        Long min = Math.round(list.getTemp().getMin());
-        Long max = Math.round(list.getTemp().getMax());
-
-        return String.format("%s - %s - %s/%s",
-                dateString, description, min, max
-        );
-    }*/
+        return String.format("Title: %s\nSynopsis: %s\nAdult: %s\n",
+                titulo, sinopsis, adulto1);
+    }
 }
