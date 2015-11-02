@@ -78,8 +78,6 @@ public class TopRatedMovies {
         }else{
             adulto1 = "- 18 years";
         }
-        //double mediaVotos = (double)list.getVoteAverage();
-        //int votos = list.getVoteCount();
 
         return String.format("Title: %s\nSynopsis: %s\nAdult: %s\n",
                 titulo, sinopsis, adulto1);
