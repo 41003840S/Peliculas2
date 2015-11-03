@@ -1,5 +1,5 @@
 
-package com.example.manuel.peliculas.topratedmovies;
+package com.example.manuel.peliculas.popularmovies;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 
-
-public class FilmServiceTopRated {
+public class MovieService {
 
     private Integer page;
     private List<Result> results = new ArrayList<Result>();
