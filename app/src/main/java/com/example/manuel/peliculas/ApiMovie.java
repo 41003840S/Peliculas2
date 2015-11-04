@@ -13,6 +13,8 @@ import retrofit.Response;
 import retrofit.Retrofit;
 import retrofit.http.GET;
 import retrofit.http.Query;
+
+
 //Interfaz con dos metodos uno para hacer la llamada a peliculasPopulares y el otro para peliculasTopRated
  interface MoviedbService {
 
