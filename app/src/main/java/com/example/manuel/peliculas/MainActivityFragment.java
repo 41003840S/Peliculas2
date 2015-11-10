@@ -1,5 +1,6 @@
 package com.example.manuel.peliculas;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -31,8 +32,6 @@ public class MainActivityFragment extends Fragment {
     public void onStart() {
         super.onStart();
         refresh();
-        /*ApiMovie pelicula = new ApiMovie();
-        pelicula.mostrarPopulares(adapter1);            //TENGO QUE LLAMAR A UNA PARA QUE INICIE CON ALGO SINO PETA*/
     }
 
     @Override
@@ -58,6 +57,8 @@ public class MainActivityFragment extends Fragment {
         listaPeliculas.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                Intent intent = new Intent();
+
                 return false;
             }
         });
