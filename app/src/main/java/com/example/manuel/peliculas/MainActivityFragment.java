@@ -10,29 +10,35 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.manuel.peliculas.popularmovies.Result;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class MainActivityFragment extends Fragment {
 
     ListView listaPeliculas;
-    ArrayList items;
-    ArrayAdapter adapter;
+    ArrayList<Result> items;
+    MovieAdapter adapter1;
+
+    public MainActivityFragment(){
+    }
 
     //Cuando inicia la actividad muestra las peliculas populares
     @Override
     public void onStart() {
         super.onStart();
-        ApiMovie pelicula = new ApiMovie();
-        pelicula.mostrarPopulares(adapter);
+        refresh();
+        /*ApiMovie pelicula = new ApiMovie();
+        pelicula.mostrarPopulares(adapter1);            //TENGO QUE LLAMAR A UNA PARA QUE INICIE CON ALGO SINO PETA*/
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         setHasOptionsMenu(true);
 
         View fragment = inflater.inflate(R.layout.fragment_main, container, false);
@@ -40,25 +46,21 @@ public class MainActivityFragment extends Fragment {
         //Enlazamos el listView
         listaPeliculas = (ListView) fragment.findViewById(R.id.listView);
 
-        String data[] = {"Peli1", "Peli2", "Peli3", "Peli4", "Peli5", "Peli6", "Peli7", "Peli8", "Peli9", "Peli10"};
+        items = new ArrayList<>();
 
-        //Añadimos el array de Strings a un ArrayList
-        items = new ArrayList(Arrays.asList(data));
-
-        //Enlazamos con el adaptador los datos con el ListView
-        adapter = new ArrayAdapter<String>(getContext(),
-                R.layout.filas_peliculas, R.id.tv_row, items);
+        //Enlazamos con el adaptador personalizado los datos con el ListView
+        adapter1 = new MovieAdapter(getContext(),R.layout.filas_peliculas,items);
 
         //Seteamos el ListView con el adaptador
-        listaPeliculas.setAdapter(adapter);
+        listaPeliculas.setAdapter(adapter1);
 
         //Crea un Listener para que con pulsacion prolongada haga algo
-       /* listaPeliculas.setOnLongClickListener(new View.OnLongClickListener() {
+        listaPeliculas.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 return false;
             }
-        });*/
+        });
 
         return fragment;
     }
@@ -100,9 +102,9 @@ public class MainActivityFragment extends Fragment {
         //Segun la Setting Preference que elijamos invocara un metodo u otro
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         if (preferences.getString("category_list","0").equals("0")){
-            pelicula.mostrarPopulares(adapter);
+            pelicula.mostrarPopulares(adapter1);
         }else if (preferences.getString("category_list","0").equals("1")) {
-            pelicula.mostrarTopRated(adapter);
+            pelicula.mostrarTopRated(adapter1);
         }
 
     }
