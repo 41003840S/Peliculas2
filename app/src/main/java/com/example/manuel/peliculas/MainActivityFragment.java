@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.example.manuel.peliculas.popularmovies.Result;
@@ -21,7 +22,8 @@ import java.util.ArrayList;
 
 public class MainActivityFragment extends Fragment {
 
-    ListView listaPeliculas;
+    //ListView listaPeliculas;
+    GridView listaPeliculas;
     ArrayList<Result> items;
     MovieAdapter adapter1;
 
@@ -44,7 +46,7 @@ public class MainActivityFragment extends Fragment {
         View fragment = inflater.inflate(R.layout.fragment_main, container, false);
 
         //Enlazamos el listView
-        listaPeliculas = (ListView) fragment.findViewById(R.id.listView);
+        listaPeliculas = (GridView) fragment.findViewById(R.id.gridView);
 
         items = new ArrayList<>();
 
@@ -54,8 +56,8 @@ public class MainActivityFragment extends Fragment {
         //Seteamos el ListView con el adaptador
         listaPeliculas.setAdapter(adapter1);
 
-        //Crea un Listener para que con pulsacion prolongada haga algo
-    listaPeliculas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //Crea un Listener para que con pulsacion abra otro activity con la informacion de la pelicula
+        listaPeliculas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Result peliculaElegida = (Result) parent.getItemAtPosition(position);

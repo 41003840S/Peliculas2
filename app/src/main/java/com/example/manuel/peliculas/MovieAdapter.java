@@ -37,18 +37,22 @@ public class MovieAdapter extends ArrayAdapter<Result> {
 
         }
         //Enlazamos las variables con las ids
+
+         /*Comentado para el gridView que solo usa la imagen
          tvTitulo = (TextView) convertView.findViewById(R.id.ad_tvtitulo);
          tvFechaEstreno = (TextView) convertView.findViewById(R.id.tv_fechaestreno);
          tvPopularidad = (TextView) convertView.findViewById(R.id.tv_popularidad);
-         //tvDescripcion = (TextView) convertView.findViewById(R.id.description);
+         tvDescripcion = (TextView) convertView.findViewById(R.id.tv_descripcion);*/
          ivPosterImage = (ImageView) convertView.findViewById(R.id.imageView);
 
 
         //Metemos los datos de los objetos provinientes del JSON en el layout
+
+        /*Comentado para el gridView que solo usa la imagen
         tvTitulo.setText(resultItem.getTitle());
         tvFechaEstreno.setText(resultItem.getReleaseDate());
         tvPopularidad.setText(decimal.format(resultItem.getPopularity())+"%");
-        //tvDescripcion.setText(resultItem.getOverview());
+        tvDescripcion.setText(resultItem.getOverview());*/
         Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + resultItem.getPosterPath()).fit().into(ivPosterImage);
 
         return convertView;
