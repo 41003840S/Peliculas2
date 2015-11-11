@@ -50,8 +50,8 @@ public class ActivityDetail extends AppCompatActivity {
 
         //Metemos los datos de los objetos provinientes del JSON en el layout
         titulo.setText(peliculaElegida.getTitle());
-        release.setText(peliculaElegida.getReleaseDate());
-        popularidad.setText(decimal.format(peliculaElegida.getPopularity())+"%");
+        release.setText("Release date: " + peliculaElegida.getReleaseDate());
+        popularidad.setText("Popularity: " + decimal.format(peliculaElegida.getPopularity())+"%");
         overview.setText(peliculaElegida.getOverview());
         Picasso.with(this).load(POSTERURL + POSTERSIZE + peliculaElegida.getPosterPath()).fit().into(poster);
 
