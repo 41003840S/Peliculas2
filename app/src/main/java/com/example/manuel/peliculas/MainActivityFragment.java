@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.manuel.peliculas.popularmovies.Result;
@@ -54,15 +55,15 @@ public class MainActivityFragment extends Fragment {
         listaPeliculas.setAdapter(adapter1);
 
         //Crea un Listener para que con pulsacion prolongada haga algo
-        listaPeliculas.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent intent = new Intent();
-
-                return false;
-            }
-        });
-
+    listaPeliculas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Result peliculaElegida = (Result) parent.getItemAtPosition(position);
+            Intent intent = new Intent(getContext(), DetailActivity.class);
+            intent.putExtra("pelicula", peliculaElegida);
+            startActivity(intent);
+        }
+    });
         return fragment;
     }
 

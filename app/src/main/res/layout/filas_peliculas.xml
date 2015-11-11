@@ -11,9 +11,9 @@
         android:id="@+id/tv_fechaestreno"
         android:layout_gravity="right"
         android:textSize="15dp"
-        android:layout_below="@+id/tv_titulo"
-        android:layout_alignLeft="@+id/description"
-        android:layout_alignStart="@+id/description" />
+        android:layout_below="@+id/ad_tvtitulo"
+        android:layout_alignLeft="@+id/ad_tvtitulo"
+        android:layout_alignStart="@+id/ad_tvtitulo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,16 +22,15 @@
         android:text="Puntuación"
         android:id="@+id/tv_popularidad"
         android:textSize="15dp"
-        android:layout_above="@+id/description"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Titulo"
-        android:id="@+id/tv_titulo"
+        android:id="@+id/ad_tvtitulo"
         android:textSize="20dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageView"
@@ -44,17 +43,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/description"
-        android:layout_below="@+id/tv_fechaestreno"
-        android:layout_alignLeft="@+id/tv_titulo"
-        android:layout_alignStart="@+id/tv_titulo"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignRight="@+id/tv_popularidad"
-        android:layout_alignEnd="@+id/tv_popularidad" />
 
 </RelativeLayout>

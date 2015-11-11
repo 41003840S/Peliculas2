@@ -18,7 +18,8 @@ public class MovieAdapter extends ArrayAdapter<Result> {
     final private String POSTERURL = "http://image.tmdb.org/t/p/";
     final private String POSTERSIZE = "w185";
     DecimalFormat decimal = new DecimalFormat("#.#");
-
+    ImageView ivPosterImage;
+    TextView tvDescripcion, tvPopularidad, tvFechaEstreno, tvTitulo;
 
     public MovieAdapter(Context context, int resource, ArrayList<Result> objects) {
         super(context, resource, objects);
@@ -36,18 +37,18 @@ public class MovieAdapter extends ArrayAdapter<Result> {
 
         }
         //Enlazamos las variables con las ids
-        TextView tvTitulo = (TextView) convertView.findViewById(R.id.tv_titulo);
-        TextView tvFechaEstreno = (TextView) convertView.findViewById(R.id.tv_fechaestreno);
-        TextView tvPopularidad = (TextView) convertView.findViewById(R.id.tv_popularidad);
-        TextView tvDescripcion = (TextView) convertView.findViewById(R.id.description);
-        ImageView ivPosterImage = (ImageView) convertView.findViewById(R.id.imageView);
+         tvTitulo = (TextView) convertView.findViewById(R.id.ad_tvtitulo);
+         tvFechaEstreno = (TextView) convertView.findViewById(R.id.tv_fechaestreno);
+         tvPopularidad = (TextView) convertView.findViewById(R.id.tv_popularidad);
+         //tvDescripcion = (TextView) convertView.findViewById(R.id.description);
+         ivPosterImage = (ImageView) convertView.findViewById(R.id.imageView);
 
 
         //Metemos los datos de los objetos provinientes del JSON en el layout
         tvTitulo.setText(resultItem.getTitle());
         tvFechaEstreno.setText(resultItem.getReleaseDate());
         tvPopularidad.setText(decimal.format(resultItem.getPopularity())+"%");
-        tvDescripcion.setText(resultItem.getOverview());
+        //tvDescripcion.setText(resultItem.getOverview());
         Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + resultItem.getPosterPath()).fit().into(ivPosterImage);
 
         return convertView;

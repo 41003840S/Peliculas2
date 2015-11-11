@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/tv_titulo"
+        android:id="@+id/ad_tvtitulo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -24,22 +24,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/tv_releasedate"
-        android:layout_below="@+id/tv_titulo"
+        android:id="@+id/ad_tvreleasedate"
+        android:layout_below="@+id/ad_tvtitulo"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/tv_overview"
-        android:layout_below="@+id/tv_releasedate"
+        android:id="@+id/ad_tvoverview"
+        android:layout_below="@+id/ad_tvreleasedate"
         android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="110dp"
         android:layout_height="170dp"
-        android:id="@+id/iv_poster"
-        android:layout_below="@+id/tv_overview"
+        android:id="@+id/ad_ivposter"
+        android:layout_below="@+id/ad_tvpopulridad"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/ad_tvpopulridad"
+        android:layout_below="@+id/ad_tvoverview"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
