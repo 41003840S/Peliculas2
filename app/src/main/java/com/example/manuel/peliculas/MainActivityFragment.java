@@ -59,7 +59,7 @@ public class MainActivityFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Result peliculaElegida = (Result) parent.getItemAtPosition(position);
-            Intent intent = new Intent(getContext(), DetailActivity.class);
+            Intent intent = new Intent(getContext(), ActivityDetail.class);
             intent.putExtra("pelicula", peliculaElegida);
             startActivity(intent);
         }

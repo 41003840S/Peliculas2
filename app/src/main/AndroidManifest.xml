@@ -29,8 +29,8 @@
                 android:value="com.example.manuel.peliculas.MainActivity" />
         </activity>
         <activity
-            android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
+            android:name=".ActivityDetail"
+            android:label="@string/title_activity_activity_detail"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
