@@ -3,7 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <!-- Comentado para el gridView que solo usa la imagen
      <TextView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -35,7 +34,7 @@
          android:textSize="20dp"
          android:layout_alignParentTop="true"
          android:layout_toRightOf="@+id/imageView"
-         android:layout_toEndOf="@+id/imageView" />   -->
+         android:layout_toEndOf="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -45,7 +44,7 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="false" />
 
-    <!-- <TextView
+     <TextView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:text="New Text"
@@ -53,6 +52,6 @@
          android:layout_below="@+id/tv_fechaestreno"
          android:layout_alignBottom="@+id/imageView"
          android:layout_alignEnd="@+id/tv_popularidad"
-         android:layout_toEndOf="@+id/imageView" />   -->
+         android:layout_toEndOf="@+id/imageView" />
 
 </RelativeLayout>

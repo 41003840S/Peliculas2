@@ -44,7 +44,7 @@ public class ApiMovie {
     }
 
     //Metodo para mostrar las peliculas populares
-    public void mostrarPopulares(final MovieAdapter adapter) {
+    public void mostrarPopulares(final GridAdapter adapter) {
         //Llamada al servicio Moviedb con el metodo de la interfaz
         Call<List> llamadaPelicula = service.peliculasPopulares(APPID);
 
@@ -70,7 +70,7 @@ public class ApiMovie {
     }
 
     //Metodo para mostrar topRated igual que el anterior solo cambia la llmada al metodo de la interfaz
-    public void mostrarTopRated(final MovieAdapter adapter) {
+    public void mostrarTopRated(final GridAdapter adapter) {
 
         //Cambia el metodo de la interfaz
         Call<List> llamadaPelicula = service.peliculasTopRated(APPID);

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.manuel.peliculas.popularmovies.Result;
 
@@ -22,10 +23,12 @@ import java.util.ArrayList;
 
 public class MainActivityFragment extends Fragment {
 
-    //ListView listaPeliculas;
-    GridView listaPeliculas;
+    ListView listaPeliculas;
+    GridView gridPeliculas;
+    TextView categoria;
+    ListAdapter listAdapter;
+    GridAdapter gridAdapter;
     ArrayList<Result> items;
-    MovieAdapter adapter1;
 
     public MainActivityFragment(){
     }
@@ -46,26 +49,29 @@ public class MainActivityFragment extends Fragment {
         View fragment = inflater.inflate(R.layout.fragment_main, container, false);
 
         //Enlazamos el listView
-        listaPeliculas = (GridView) fragment.findViewById(R.id.gridView);
+        gridPeliculas = (GridView) fragment.findViewById(R.id.gridView);
+        categoria =(TextView) fragment.findViewById(R.id.tv_categoria);
 
         items = new ArrayList<>();
 
         //Enlazamos con el adaptador personalizado los datos con el ListView
-        adapter1 = new MovieAdapter(getContext(),R.layout.filas_peliculas,items);
+        gridAdapter = new GridAdapter(getContext(),R.layout.gridview_layout,items);
 
         //Seteamos el ListView con el adaptador
-        listaPeliculas.setAdapter(adapter1);
+        gridPeliculas.setAdapter(gridAdapter);
 
         //Crea un Listener para que con pulsacion abra otro activity con la informacion de la pelicula
-        listaPeliculas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Result peliculaElegida = (Result) parent.getItemAtPosition(position);
-            Intent intent = new Intent(getContext(), ActivityDetail.class);
-            intent.putExtra("pelicula", peliculaElegida);
-            startActivity(intent);
-        }
-    });
+        gridPeliculas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Cogemos la pelicula seleccionada por el itemposition
+                Result peliculaElegida = (Result) parent.getItemAtPosition(position);
+                //Y se la pasamos con un intent a ActivityDetail
+                Intent intent = new Intent(getContext(), ActivityDetail.class);
+                intent.putExtra("pelicula", peliculaElegida);
+                startActivity(intent);
+            }
+        });
         return fragment;
     }
 
@@ -90,9 +96,14 @@ public class MainActivityFragment extends Fragment {
             return true;
         }
 
-        if (id == R.id.refresh) {
+        /*if (id == R.id.refresh) {
             //Al presionar el item invoca el metodo refresh
             refresh();
+            return true;
+        }*/
+        if (id == R.id.cambiar) {
+
+
             return true;
         }
 
@@ -106,9 +117,11 @@ public class MainActivityFragment extends Fragment {
         //Segun la Setting Preference que elijamos invocara un metodo u otro
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         if (preferences.getString("category_list","0").equals("0")){
-            pelicula.mostrarPopulares(adapter1);
+            pelicula.mostrarPopulares(gridAdapter);
+            categoria.setText("Popular Movies");
         }else if (preferences.getString("category_list","0").equals("1")) {
-            pelicula.mostrarTopRated(adapter1);
+            pelicula.mostrarTopRated(gridAdapter);
+            categoria.setText("Top Rated Movies");
         }
 
     }

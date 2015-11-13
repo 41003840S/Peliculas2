@@ -22,12 +22,15 @@ public class ActivityDetail extends AppCompatActivity {
     final private String POSTERURL = "http://image.tmdb.org/t/p/";
     final private String POSTERSIZE = "w185";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_detail);
+        //Recibimos el intent con la pelicula que habiamos elegido
+        Result peliculaElegida = (Result) getIntent().getExtras().get("pelicula");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //Seteamos el titulo del toolbar con el titulo de la pelicula
+        toolbar.setTitle(peliculaElegida.getTitle());
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -40,7 +43,6 @@ public class ActivityDetail extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Result peliculaElegida = (Result) getIntent().getExtras().get("pelicula");
 
         titulo = (TextView) findViewById(R.id.ad_tvtitulo);
         release = (TextView) findViewById(R.id.ad_tvreleasedate);
