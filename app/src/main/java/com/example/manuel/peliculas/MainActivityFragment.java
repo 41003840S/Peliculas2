@@ -2,9 +2,12 @@ package com.example.manuel.peliculas;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,21 +17,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.SimpleCursorAdapter;
 
 import com.example.manuel.peliculas.popularmovies.Result;
+import com.example.manuel.peliculas.provider.movies.MoviesColumns;
 
 import java.util.ArrayList;
 
 
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>{
 
     ListView listaPeliculas;
     GridView gridPeliculas;
-    TextView categoria;
-    ListAdapter listAdapter;
-    GridAdapter gridAdapter;
     ArrayList<Result> items;
+    GridAdapterDB gridAdapterDB;
+    Cursor cursor;
 
     public MainActivityFragment(){
     }
@@ -37,7 +40,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        refresh();
+        //refresh();
     }
 
     @Override
@@ -48,17 +51,29 @@ public class MainActivityFragment extends Fragment {
 
         View fragment = inflater.inflate(R.layout.fragment_main, container, false);
 
-        //Enlazamos el listView
+        //Enlazamos el GridView y el listView
         gridPeliculas = (GridView) fragment.findViewById(R.id.gridView);
-        categoria =(TextView) fragment.findViewById(R.id.tv_categoria);
+        //items = new ArrayList<>();
 
-        items = new ArrayList<>();
+        //Enlazamos con el adaptador personalizado los datos con el GridView
+        gridAdapterDB = new GridAdapterDB(getContext(),
+                R.layout.gridview_layout,
+                null,
+                new String[] {
+                        MoviesColumns.TITLE,
+                        MoviesColumns.POSTER_PATH
+                },
+                new int[] {
+                        R.id.ad_tvtitulo,
+                        R.id.imageView
+                },
+                0);
 
-        //Enlazamos con el adaptador personalizado los datos con el ListView
-        gridAdapter = new GridAdapter(getContext(),R.layout.gridview_layout,items);
+        //Inicialitzem el Loader
+        getLoaderManager().initLoader(0, null, this);
 
-        //Seteamos el ListView con el adaptador
-        gridPeliculas.setAdapter(gridAdapter);
+        //Seteamos el GridView/ListView con el adaptador
+        gridPeliculas.setAdapter(gridAdapterDB);
 
         //Crea un Listener para que con pulsacion abra otro activity con la informacion de la pelicula
         gridPeliculas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -75,6 +90,8 @@ public class MainActivityFragment extends Fragment {
         return fragment;
     }
 
+
+
     /*Creamos el onCreate y el OptionItemSelect del menu que hemos creado para el fragment en RES--> MENU,
      para añadir el item (refresh)*/
     @Override
@@ -83,6 +100,9 @@ public class MainActivityFragment extends Fragment {
 
         inflater.inflate(R.menu.menu_fragment, menu);
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -102,28 +122,44 @@ public class MainActivityFragment extends Fragment {
             return true;
         }*/
         if (id == R.id.cambiar) {
-
-
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void refresh() {
 
-        ApiMovie pelicula = new ApiMovie();
+
+    private void refresh() {
+       /* ApiMovie pelicula = new ApiMovie();
 
         //Segun la Setting Preference que elijamos invocara un metodo u otro
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         if (preferences.getString("category_list","0").equals("0")){
-            pelicula.mostrarPopulares(gridAdapter);
-            categoria.setText("Popular Movies");
+            pelicula.mostrarPopulares(getContext());
         }else if (preferences.getString("category_list","0").equals("1")) {
-            pelicula.mostrarTopRated(gridAdapter);
-            categoria.setText("Top Rated Movies");
-        }
-
+            pelicula.mostrarTopRated(getContext());
+        }*/
     }
 
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(getContext(),
+                MoviesColumns.CONTENT_URI,
+                null,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        gridAdapterDB.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        gridAdapterDB.swapCursor(null);
+    }
 }

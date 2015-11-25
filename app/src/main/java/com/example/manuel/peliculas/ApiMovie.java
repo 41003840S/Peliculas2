@@ -1,8 +1,13 @@
 package com.example.manuel.peliculas;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.example.manuel.peliculas.popularmovies.List;
+import com.example.manuel.peliculas.popularmovies.Result;
+import com.example.manuel.peliculas.provider.movies.MoviesColumns;
+import com.example.manuel.peliculas.provider.movies.MoviesContentValues;
 
 import java.util.Arrays;
 import retrofit.Call;
@@ -29,7 +34,7 @@ import retrofit.http.Query;
 
 public class ApiMovie {
 
-    private final InterfazMovies service;                                    //Constante objeto de la interfaz
+    private final InterfazMovies service;                                           //Constante objeto de la interfaz
     private final String BASE_URL = "https://api.themoviedb.org/3/movie/";          //Constante URL parte que no cambia
     private final String APPID = "13bc649b4be786a5459437a47ac059a5";                //Api Key de la API de Moviedb
 
@@ -44,7 +49,7 @@ public class ApiMovie {
     }
 
     //Metodo para mostrar las peliculas populares
-    public void mostrarPopulares(final GridAdapter adapter) {
+    public void mostrarPopulares(final Context context) {
         //Llamada al servicio Moviedb con el metodo de la interfaz
         Call<List> llamadaPelicula = service.peliculasPopulares(APPID);
 
@@ -56,11 +61,21 @@ public class ApiMovie {
 
                 List film = response.body();
 
-                Log.w("pelis", film.getResults().toString());
-                //Limpiamos el adaptador
-                adapter.clear();
-                adapter.addAll(film.getResults());
+                //Para cada resultado de una pelicula cogemos los atributos que nos interesan para meterlos en la BD
+                for (Result movie : film.getResults())
+                {
+                    MoviesContentValues valores = new MoviesContentValues();
+
+                    valores.putTitle(movie.getTitle().toString());
+                    valores.putReleaseDate(movie.getReleaseDate().toString());
+                    valores.putPopularity(movie.getPopularity());
+                    valores.putSynopsis(movie.getOverview().toString());
+                    valores.putPosterPath(movie.getPosterPath().toString());
+                    context.getContentResolver().insert(MoviesColumns.CONTENT_URI, valores.values());
+                }
+
             }
+
 
             @Override
             public void onFailure(Throwable t) {
@@ -70,7 +85,7 @@ public class ApiMovie {
     }
 
     //Metodo para mostrar topRated igual que el anterior solo cambia la llmada al metodo de la interfaz
-    public void mostrarTopRated(final GridAdapter adapter) {
+    public void mostrarTopRated(final Context context) {
 
         //Cambia el metodo de la interfaz
         Call<List> llamadaPelicula = service.peliculasTopRated(APPID);
@@ -82,9 +97,17 @@ public class ApiMovie {
 
                 List film = response.body();
 
-                adapter.clear();
+                for (Result movie : film.getResults())
+                {
+                    MoviesContentValues valores = new MoviesContentValues();
 
-                adapter.addAll(film.getResults());
+                    valores.putTitle(movie.getTitle().toString());
+                    valores.putReleaseDate(movie.getReleaseDate().toString());
+                    valores.putPopularity(movie.getPopularity());
+                    valores.putSynopsis(movie.getOverview().toString());
+                    valores.putPosterPath(movie.getPosterPath().toString());
+                    context.getContentResolver().insert(MoviesColumns.CONTENT_URI, valores.values());
+                }
             }
 
             @Override

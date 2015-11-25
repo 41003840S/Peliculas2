@@ -1,43 +1,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:showIn="@layout/activity_main"
-    tools:context=".MainActivityFragment">
-
-   <!-- Comentado para anadir el GridView
-   <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" /> -->
+    tools:context=".MainActivityFragment"
+    tools:showIn="@layout/activity_main">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tv_categoria"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:gravity="center_horizontal" />
+    <ListView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/listView"
+         android:layout_centerVertical="true"
+         android:layout_centerHorizontal="true" />
+
 
     <GridView
+        android:id="@+id/gridView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gridView"
         android:layout_centerHorizontal="true"
-        android:numColumns="auto_fit"
 
-        android:padding="5dp"
-        android:verticalSpacing="5dp"
-        android:horizontalSpacing="5dp"
         android:columnWidth="90dp"
-        android:stretchMode="columnWidth"
         android:gravity="center"
-        android:layout_below="@+id/tv_categoria" />
+        android:horizontalSpacing="5dp"
+        android:numColumns="auto_fit"
+        android:padding="5dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp" />
 
 </RelativeLayout>

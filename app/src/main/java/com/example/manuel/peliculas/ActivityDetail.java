@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 
 public class ActivityDetail extends AppCompatActivity {
 
-    ImageView poster;
+    ImageView poster, estrella;
     TextView titulo, release, overview,popularidad;
     DecimalFormat decimal = new DecimalFormat("#.#");
     final private String POSTERURL = "http://image.tmdb.org/t/p/";
@@ -26,14 +26,32 @@ public class ActivityDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_detail);
+
         //Recibimos el intent con la pelicula que habiamos elegido
         Result peliculaElegida = (Result) getIntent().getExtras().get("pelicula");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         //Seteamos el titulo del toolbar con el titulo de la pelicula
         toolbar.setTitle(peliculaElegida.getTitle());
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        titulo = (TextView) findViewById(R.id.ad_tvtitulo);
+        release = (TextView) findViewById(R.id.ad_tvreleasedate);
+        overview = (TextView) findViewById(R.id.ad_tvoverview);
+        popularidad = (TextView) findViewById(R.id.ad_tvpopulridad);
+        poster= (ImageView) findViewById(R.id.ad_ivposter);
+        estrella = (ImageView) findViewById(R.id.estrella);
+
+        //Metemos los datos de los objetos provinientes del JSON en el layout
+        titulo.setText(peliculaElegida.getTitle());
+        release.setText("Release: " + peliculaElegida.getReleaseDate());
+        popularidad.setText(decimal.format(peliculaElegida.getPopularity()));
+        overview.setText(peliculaElegida.getOverview());
+        Picasso.with(this).load(POSTERURL + POSTERSIZE + peliculaElegida.getPosterPath()).fit().into(poster);
+        Picasso.with(this).load(R.drawable.starcircle).fit().into(estrella);
+
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,22 +59,7 @@ public class ActivityDetail extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        titulo = (TextView) findViewById(R.id.ad_tvtitulo);
-        release = (TextView) findViewById(R.id.ad_tvreleasedate);
-        overview = (TextView) findViewById(R.id.ad_tvoverview);
-        popularidad = (TextView) findViewById(R.id.ad_tvpopulridad);
-        poster= (ImageView) findViewById(R.id.ad_ivposter);
-
-        //Metemos los datos de los objetos provinientes del JSON en el layout
-        titulo.setText(peliculaElegida.getTitle());
-        release.setText("Release date: " + peliculaElegida.getReleaseDate());
-        popularidad.setText("Popularity: " + decimal.format(peliculaElegida.getPopularity())+"%");
-        overview.setText(peliculaElegida.getOverview());
-        Picasso.with(this).load(POSTERURL + POSTERSIZE + peliculaElegida.getPosterPath()).fit().into(poster);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
     }
 
 }

@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "name": "title",
+      "type": "String"
+    },
+    {
+      "name": "release_date",
+      "type": "String"
+    },
+    {
+      "name": "popularity",
+      "type": "Double"
+    },
+    {
+      "name": "poster_path",
+      "type": "String"
+    },
+    {
+      "name": "synopsis",
+      "type": "String"
+    }
+  ]
+}

@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ListAdapter extends ArrayAdapter<Result> {
+public class ListAdapterApi extends ArrayAdapter<Result> {
 
     final private String POSTERURL = "http://image.tmdb.org/t/p/";
     final private String POSTERSIZE = "w185";
@@ -21,7 +21,7 @@ public class ListAdapter extends ArrayAdapter<Result> {
     ImageView ivPosterImage;
     TextView tvDescripcion, tvPopularidad, tvFechaEstreno, tvTitulo;
 
-    public ListAdapter(Context context, int resource, ArrayList<Result> objects) {
+    public ListAdapterApi(Context context, int resource, ArrayList<Result> objects) {
         super(context, resource, objects);
     }
 
@@ -37,8 +37,6 @@ public class ListAdapter extends ArrayAdapter<Result> {
 
         }
         //Enlazamos las variables con las ids
-
-
         tvTitulo = (TextView) convertView.findViewById(R.id.ad_tvtitulo);
         tvFechaEstreno = (TextView) convertView.findViewById(R.id.tv_fechaestreno);
         tvPopularidad = (TextView) convertView.findViewById(R.id.tv_popularidad);
@@ -47,12 +45,10 @@ public class ListAdapter extends ArrayAdapter<Result> {
 
 
         //Metemos los datos de los objetos provinientes del JSON en el layout
-
-
         tvTitulo.setText(resultItem.getTitle());
-        tvFechaEstreno.setText(resultItem.getReleaseDate());
-        tvPopularidad.setText(decimal.format(resultItem.getPopularity())+"%");
-        tvDescripcion.setText(resultItem.getOverview());
+       // tvFechaEstreno.setText(resultItem.getReleaseDate());
+        //tvPopularidad.setText(decimal.format(resultItem.getPopularity())+"%");
+        //tvDescripcion.setText(resultItem.getOverview());
         Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + resultItem.getPosterPath()).fit().into(ivPosterImage);
 
         return convertView;

@@ -13,15 +13,15 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class GridAdapter extends ArrayAdapter<Result> {
+public class GridAdapterApi extends ArrayAdapter<Result> {
 
     final private String POSTERURL = "http://image.tmdb.org/t/p/";
     final private String POSTERSIZE = "w185";
     DecimalFormat decimal = new DecimalFormat("#.#");
-    ImageView ivPosterImage;
-    TextView tvTitulo;
+    ImageView iv_PosterImage;
+    TextView tv_Titulo;
 
-    public GridAdapter(Context context, int resource, ArrayList<Result> objects) {
+    public GridAdapterApi(Context context, int resource, ArrayList<Result> objects) {
         super(context, resource, objects);
     }
 
@@ -37,13 +37,13 @@ public class GridAdapter extends ArrayAdapter<Result> {
 
         }
         //Enlazamos las variables con las ids
-         tvTitulo = (TextView) convertView.findViewById(R.id.ad_tvtitulo);
-         ivPosterImage = (ImageView) convertView.findViewById(R.id.imageView);
+         tv_Titulo = (TextView) convertView.findViewById(R.id.ad_tvtitulo);
+         iv_PosterImage = (ImageView) convertView.findViewById(R.id.imageView);
 
 
         //Metemos los datos de los objetos provinientes del JSON en el layout
-        tvTitulo.setText(resultItem.getTitle());
-        Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + resultItem.getPosterPath()).fit().into(ivPosterImage);
+        tv_Titulo.setText(resultItem.getTitle());
+        Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + resultItem.getPosterPath()).fit().into(iv_PosterImage);
 
         return convertView;
 
