@@ -28,19 +28,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.manuel.peliculas.MainActivity" />
         </activity>
+
+        <provider
+            android:name=".provider.MovieProvider"
+            android:authorities="com.example.manuel.peliculas.provider"
+            android:exported="false" />
+
         <activity
-            android:name=".ActivityDetail"
-            android:label="@string/title_activity_activity_detail"
+            android:name=".DetailActivity"
+            android:label="@string/title_activity_detail"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.manuel.peliculas.MainActivity" />
         </activity>
-        <provider
-            android:name="com.example.manuel.peliculas.provider.MovieProvider"
-            android:authorities="com.example.manuel.peliculas.provider"
-            android:exported="false" />
     </application>
 
 </manifest>

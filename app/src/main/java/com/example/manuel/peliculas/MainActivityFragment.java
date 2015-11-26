@@ -41,13 +41,19 @@ public class MainActivityFragment extends Fragment implements android.support.v4
     public void onStart() {
         super.onStart();
         //refresh();
+        getLoaderManager().restartLoader(0, null, this);
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        setHasOptionsMenu(true);
 
         View fragment = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -79,12 +85,10 @@ public class MainActivityFragment extends Fragment implements android.support.v4
         gridPeliculas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Cogemos la pelicula seleccionada por el itemposition
-                Result peliculaElegida = (Result) parent.getItemAtPosition(position);
-                //Y se la pasamos con un intent a ActivityDetail
-                Intent intent = new Intent(getContext(), ActivityDetail.class);
-                intent.putExtra("pelicula", peliculaElegida);
-                startActivity(intent);
+                //Cogemos la id de la pelicula seleccionada por el itemposition y se la pasamos con un intent a ActivityDetail
+                Intent i = new Intent(getContext(), DetailActivity.class);
+                i.putExtra("movie_id", id);
+                startActivity(i);
             }
         });
         return fragment;
@@ -116,14 +120,14 @@ public class MainActivityFragment extends Fragment implements android.support.v4
             return true;
         }
 
-        /*if (id == R.id.refresh) {
+        if (id == R.id.refresh) {
             //Al presionar el item invoca el metodo refresh
             refresh();
             return true;
-        }*/
-        if (id == R.id.cambiar) {
-            return true;
         }
+        /*if (id == R.id.cambiar) {
+            return true;
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -131,15 +135,16 @@ public class MainActivityFragment extends Fragment implements android.support.v4
 
 
     private void refresh() {
-       /* ApiMovie pelicula = new ApiMovie();
 
         //Segun la Setting Preference que elijamos invocara un metodo u otro
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         if (preferences.getString("category_list","0").equals("0")){
-            pelicula.mostrarPopulares(getContext());
+
         }else if (preferences.getString("category_list","0").equals("1")) {
-            pelicula.mostrarTopRated(getContext());
-        }*/
+
+        }
+
+
     }
 
 
