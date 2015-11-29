@@ -1,9 +1,6 @@
-package com.example.manuel.peliculas.provider.movies;
-
-import java.util.Date;
+package com.example.manuel.peliculas.provider.toprated;
 
 import android.database.Cursor;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.manuel.peliculas.provider.base.AbstractCursor;
@@ -11,8 +8,8 @@ import com.example.manuel.peliculas.provider.base.AbstractCursor;
 /**
  * Cursor wrapper for the {@code movies} table.
  */
-public class MoviesCursor extends AbstractCursor implements MoviesModel {
-    public MoviesCursor(Cursor cursor) {
+public class TopRatedCursor extends AbstractCursor implements TopRatedModel {
+    public TopRatedCursor(Cursor cursor) {
         super(cursor);
     }
 
@@ -20,7 +17,7 @@ public class MoviesCursor extends AbstractCursor implements MoviesModel {
      * Primary key.
      */
     public long getId() {
-        Long res = getLongOrNull(MoviesColumns._ID);
+        Long res = getLongOrNull(TopRatedColumns._ID);
         if (res == null)
             throw new NullPointerException("The value of '_id' in the database was null, which is not allowed according to the model definition");
         return res;
@@ -32,7 +29,7 @@ public class MoviesCursor extends AbstractCursor implements MoviesModel {
      */
     @Nullable
     public String getTitle() {
-        String res = getStringOrNull(MoviesColumns.TITLE);
+        String res = getStringOrNull(TopRatedColumns.TITLE);
         return res;
     }
 
@@ -42,7 +39,7 @@ public class MoviesCursor extends AbstractCursor implements MoviesModel {
      */
     @Nullable
     public String getReleaseDate() {
-        String res = getStringOrNull(MoviesColumns.RELEASE_DATE);
+        String res = getStringOrNull(TopRatedColumns.RELEASE_DATE);
         return res;
     }
 
@@ -52,7 +49,7 @@ public class MoviesCursor extends AbstractCursor implements MoviesModel {
      */
     @Nullable
     public Double getPopularity() {
-        Double res = getDoubleOrNull(MoviesColumns.POPULARITY);
+        Double res = getDoubleOrNull(TopRatedColumns.POPULARITY);
         return res;
     }
 
@@ -62,7 +59,7 @@ public class MoviesCursor extends AbstractCursor implements MoviesModel {
      */
     @Nullable
     public String getPosterPath() {
-        String res = getStringOrNull(MoviesColumns.POSTER_PATH);
+        String res = getStringOrNull(TopRatedColumns.POSTER_PATH);
         return res;
     }
 
@@ -72,7 +69,7 @@ public class MoviesCursor extends AbstractCursor implements MoviesModel {
      */
     @Nullable
     public String getSynopsis() {
-        String res = getStringOrNull(MoviesColumns.SYNOPSIS);
+        String res = getStringOrNull(TopRatedColumns.SYNOPSIS);
         return res;
     }
 }

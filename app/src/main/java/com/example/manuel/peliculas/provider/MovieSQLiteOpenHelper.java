@@ -10,7 +10,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.example.manuel.peliculas.BuildConfig;
-import com.example.manuel.peliculas.provider.movies.MoviesColumns;
+import com.example.manuel.peliculas.provider.populars.PopularColumns;
 
 public class MovieSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = MovieSQLiteOpenHelper.class.getSimpleName();
@@ -23,13 +23,13 @@ public class MovieSQLiteOpenHelper extends SQLiteOpenHelper {
 
     // @formatter:off
     public static final String SQL_CREATE_TABLE_MOVIES = "CREATE TABLE IF NOT EXISTS "
-            + MoviesColumns.TABLE_NAME + " ( "
-            + MoviesColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + MoviesColumns.TITLE + " TEXT, "
-            + MoviesColumns.RELEASE_DATE + " TEXT, "
-            + MoviesColumns.POPULARITY + " REAL, "
-            + MoviesColumns.POSTER_PATH + " TEXT, "
-            + MoviesColumns.SYNOPSIS + " TEXT "
+            + PopularColumns.TABLE_NAME + " ( "
+            + PopularColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + PopularColumns.TITLE + " TEXT, "
+            + PopularColumns.RELEASE_DATE + " TEXT, "
+            + PopularColumns.POPULARITY + " REAL, "
+            + PopularColumns.POSTER_PATH + " TEXT, "
+            + PopularColumns.SYNOPSIS + " TEXT "
             + " );";
 
     // @formatter:on

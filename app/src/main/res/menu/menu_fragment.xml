@@ -9,10 +9,10 @@
         android:title="@string/refresh"
         app:showAsAction="ifRoom"
         android:icon="@drawable/refresh"/>
-    <item
+   <!-- <item
         android:id="@+id/cambiar"
         android:orderInCategory="100"
         android:title="@string/cambiar"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/view"/>
+        android:icon="@drawable/view"/>-->
 </menu>

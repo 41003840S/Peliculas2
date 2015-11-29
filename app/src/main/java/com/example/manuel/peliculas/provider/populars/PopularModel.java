@@ -1,16 +1,13 @@
-package com.example.manuel.peliculas.provider.movies;
+package com.example.manuel.peliculas.provider.populars;
 
 import com.example.manuel.peliculas.provider.base.BaseModel;
 
-import java.util.Date;
-
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
  * Data model for the {@code movies} table.
  */
-public interface MoviesModel extends BaseModel {
+public interface PopularModel extends BaseModel {
 
     /**
      * Get the {@code title} value.

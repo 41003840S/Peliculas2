@@ -7,12 +7,11 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.manuel.peliculas.BuildConfig;
 import com.example.manuel.peliculas.provider.base.BaseContentProvider;
-import com.example.manuel.peliculas.provider.movies.MoviesColumns;
+import com.example.manuel.peliculas.provider.populars.PopularColumns;
 
 public class MovieProvider extends BaseContentProvider {
     private static final String TAG = MovieProvider.class.getSimpleName();
@@ -33,8 +32,8 @@ public class MovieProvider extends BaseContentProvider {
     private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        URI_MATCHER.addURI(AUTHORITY, MoviesColumns.TABLE_NAME, URI_TYPE_MOVIES);
-        URI_MATCHER.addURI(AUTHORITY, MoviesColumns.TABLE_NAME + "/#", URI_TYPE_MOVIES_ID);
+        URI_MATCHER.addURI(AUTHORITY, PopularColumns.TABLE_NAME, URI_TYPE_MOVIES);
+        URI_MATCHER.addURI(AUTHORITY, PopularColumns.TABLE_NAME + "/#", URI_TYPE_MOVIES_ID);
     }
 
     @Override
@@ -52,9 +51,9 @@ public class MovieProvider extends BaseContentProvider {
         int match = URI_MATCHER.match(uri);
         switch (match) {
             case URI_TYPE_MOVIES:
-                return TYPE_CURSOR_DIR + MoviesColumns.TABLE_NAME;
+                return TYPE_CURSOR_DIR + PopularColumns.TABLE_NAME;
             case URI_TYPE_MOVIES_ID:
-                return TYPE_CURSOR_ITEM + MoviesColumns.TABLE_NAME;
+                return TYPE_CURSOR_ITEM + PopularColumns.TABLE_NAME;
 
         }
         return null;
@@ -100,10 +99,10 @@ public class MovieProvider extends BaseContentProvider {
         switch (matchedId) {
             case URI_TYPE_MOVIES:
             case URI_TYPE_MOVIES_ID:
-                res.table = MoviesColumns.TABLE_NAME;
-                res.idColumn = MoviesColumns._ID;
-                res.tablesWithJoins = MoviesColumns.TABLE_NAME;
-                res.orderBy = MoviesColumns.DEFAULT_ORDER;
+                res.table = PopularColumns.TABLE_NAME;
+                res.idColumn = PopularColumns._ID;
+                res.tablesWithJoins = PopularColumns.TABLE_NAME;
+                res.orderBy = PopularColumns.DEFAULT_ORDER;
                 break;
 
             default:

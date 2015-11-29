@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.example.manuel.peliculas.provider.movies.MoviesColumns;
+import com.example.manuel.peliculas.provider.populars.PopularColumns;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -25,7 +25,7 @@ public class GridAdapterDB extends SimpleCursorAdapter{
     ImageView iv_PosterImage;
     TextView tv_Titulo;
     Context context;
-
+    String [] from;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public GridAdapterDB(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
@@ -51,11 +51,15 @@ public class GridAdapterDB extends SimpleCursorAdapter{
 
 
         //Metemos los datos de los objetos provinientes de la BD en el layout
-        tv_Titulo.setText(myCursor.getString(myCursor.getColumnIndex(MoviesColumns.TITLE)));
-        String posterPath = myCursor.getString(myCursor.getColumnIndex(MoviesColumns.POSTER_PATH));
+        tv_Titulo.setText(myCursor.getString(myCursor.getColumnIndex(from[0])));
+        String posterPath = myCursor.getString(myCursor.getColumnIndex(from[1]));
 
         Picasso.with(context).load(POSTERURL + POSTERSIZE + posterPath).fit().into(iv_PosterImage);
 
         return convertView;
+    }
+
+    public void setFrom(String[] from) {
+        this.from=from;
     }
 }

@@ -11,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.manuel.peliculas.provider.movies.MoviesColumns;
-import com.example.manuel.peliculas.provider.movies.MoviesCursor;
-import com.github.florent37.picassopalette.PicassoPalette;
+import com.example.manuel.peliculas.provider.populars.PopularColumns;
+import com.example.manuel.peliculas.provider.populars.PopularCursor;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -49,14 +48,14 @@ public class DetailActivityFragment extends Fragment {
         //Recogemos el intent con la id de la pelicula
         Long movie_id = getActivity().getIntent().getLongExtra("movie_id", -1);
         Cursor cursor = getContext().getContentResolver().query(
-                MoviesColumns.CONTENT_URI,
+                PopularColumns.CONTENT_URI,
                 null,
-                MoviesColumns._ID + " = ?",
+                PopularColumns._ID + " = ?",
                 new String[]{String.valueOf(movie_id)},
                 null
         );
 
-        MoviesCursor moviesCursor = new MoviesCursor(cursor);
+        PopularCursor moviesCursor = new PopularCursor(cursor);
         moviesCursor.moveToNext();
 
         tvTitle.setText(moviesCursor.getTitle());
@@ -65,13 +64,11 @@ public class DetailActivityFragment extends Fragment {
                         decimal.format(moviesCursor.getPopularity()) + "%")
         );
 
-        //tvCast.setText(movie.getCastList());
+
         tvSynopsis.setText(Html.fromHtml("<b>Synopsis:</b> " + moviesCursor.getSynopsis()));
 
-        // R.drawable.large_movie_poster from
-        // http://content8.flixster.com/movie/11/15/86/11158674_pro.jpg -->
 
-        Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + moviesCursor.getPosterPath()).fit().into(ivPosterImage);
+        Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + moviesCursor.getPosterPath()).fit().centerCrop().into(ivPosterImage);
 
         /*Picasso.with(getContext())
                 .load(moviesCursor.getPosterPath())

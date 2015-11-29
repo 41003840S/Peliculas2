@@ -1,13 +1,14 @@
 package com.example.manuel.peliculas;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
 
 import com.example.manuel.peliculas.popularmovies.List;
 import com.example.manuel.peliculas.popularmovies.Result;
-import com.example.manuel.peliculas.provider.movies.MoviesColumns;
-import com.example.manuel.peliculas.provider.movies.MoviesContentValues;
+import com.example.manuel.peliculas.provider.populars.PopularColumns;
+import com.example.manuel.peliculas.provider.populars.PopularContentValues;
+import com.example.manuel.peliculas.provider.toprated.TopRatedColumns;
+import com.example.manuel.peliculas.provider.toprated.TopRatedContentValues;
 
 import java.util.Arrays;
 import retrofit.Call;
@@ -64,18 +65,16 @@ public class ApiMovie {
                 //Para cada resultado de una pelicula cogemos los atributos que nos interesan para meterlos en la BD
                 for (Result movie : film.getResults())
                 {
-                    MoviesContentValues valores = new MoviesContentValues();
+                    PopularContentValues valores = new PopularContentValues();
 
                     valores.putTitle(movie.getTitle().toString());
                     valores.putReleaseDate(movie.getReleaseDate().toString());
                     valores.putPopularity(movie.getPopularity());
                     valores.putSynopsis(movie.getOverview().toString());
                     valores.putPosterPath(movie.getPosterPath().toString());
-                    context.getContentResolver().insert(MoviesColumns.CONTENT_URI, valores.values());
+                    context.getContentResolver().insert(PopularColumns.CONTENT_URI, valores.values());
                 }
-
             }
-
 
             @Override
             public void onFailure(Throwable t) {
@@ -99,14 +98,14 @@ public class ApiMovie {
 
                 for (Result movie : film.getResults())
                 {
-                    MoviesContentValues valores = new MoviesContentValues();
+                    TopRatedContentValues valores = new TopRatedContentValues();
 
                     valores.putTitle(movie.getTitle().toString());
                     valores.putReleaseDate(movie.getReleaseDate().toString());
                     valores.putPopularity(movie.getPopularity());
                     valores.putSynopsis(movie.getOverview().toString());
                     valores.putPosterPath(movie.getPosterPath().toString());
-                    context.getContentResolver().insert(MoviesColumns.CONTENT_URI, valores.values());
+                    context.getContentResolver().insert(TopRatedColumns.CONTENT_URI, valores.values());
                 }
             }
 
