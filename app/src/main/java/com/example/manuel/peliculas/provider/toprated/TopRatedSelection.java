@@ -1,19 +1,21 @@
 package com.example.manuel.peliculas.provider.toprated;
 
-import android.content.ContentResolver;
+import java.util.Date;
+
 import android.content.Context;
+import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 
 import com.example.manuel.peliculas.provider.base.AbstractSelection;
 
 /**
- * Selection for the {@code movies} table.
+ * Selection for the {@code toprated} table.
  */
-public class TopRatedSelection extends AbstractSelection<TopRatedSelection> {
+public class TopratedSelection extends AbstractSelection<TopratedSelection> {
     @Override
     protected Uri baseUri() {
-        return TopRatedColumns.CONTENT_URI;
+        return TopratedColumns.CONTENT_URI;
     }
 
     /**
@@ -21,18 +23,18 @@ public class TopRatedSelection extends AbstractSelection<TopRatedSelection> {
      *
      * @param contentResolver The content resolver to query.
      * @param projection A list of which columns to return. Passing null will return all columns, which is inefficient.
-     * @return A {@code TopRatedCursor} object, which is positioned before the first entry, or null.
+     * @return A {@code TopratedCursor} object, which is positioned before the first entry, or null.
      */
-    public TopRatedCursor query(ContentResolver contentResolver, String[] projection) {
+    public TopratedCursor query(ContentResolver contentResolver, String[] projection) {
         Cursor cursor = contentResolver.query(uri(), projection, sel(), args(), order());
         if (cursor == null) return null;
-        return new TopRatedCursor(cursor);
+        return new TopratedCursor(cursor);
     }
 
     /**
      * Equivalent of calling {@code query(contentResolver, null)}.
      */
-    public TopRatedCursor query(ContentResolver contentResolver) {
+    public TopratedCursor query(ContentResolver contentResolver) {
         return query(contentResolver, null);
     }
 
@@ -41,238 +43,238 @@ public class TopRatedSelection extends AbstractSelection<TopRatedSelection> {
      *
      * @param context The context to use for the query.
      * @param projection A list of which columns to return. Passing null will return all columns, which is inefficient.
-     * @return A {@code TopRatedCursor} object, which is positioned before the first entry, or null.
+     * @return A {@code TopratedCursor} object, which is positioned before the first entry, or null.
      */
-    public TopRatedCursor query(Context context, String[] projection) {
+    public TopratedCursor query(Context context, String[] projection) {
         Cursor cursor = context.getContentResolver().query(uri(), projection, sel(), args(), order());
         if (cursor == null) return null;
-        return new TopRatedCursor(cursor);
+        return new TopratedCursor(cursor);
     }
 
     /**
      * Equivalent of calling {@code query(context, null)}.
      */
-    public TopRatedCursor query(Context context) {
+    public TopratedCursor query(Context context) {
         return query(context, null);
     }
 
 
-    public TopRatedSelection id(long... value) {
-        addEquals("movies." + TopRatedColumns._ID, toObjectArray(value));
+    public TopratedSelection id(long... value) {
+        addEquals("toprated." + TopratedColumns._ID, toObjectArray(value));
         return this;
     }
 
-    public TopRatedSelection idNot(long... value) {
-        addNotEquals("movies." + TopRatedColumns._ID, toObjectArray(value));
+    public TopratedSelection idNot(long... value) {
+        addNotEquals("toprated." + TopratedColumns._ID, toObjectArray(value));
         return this;
     }
 
-    public TopRatedSelection orderById(boolean desc) {
-        orderBy("movies." + TopRatedColumns._ID, desc);
+    public TopratedSelection orderById(boolean desc) {
+        orderBy("toprated." + TopratedColumns._ID, desc);
         return this;
     }
 
-    public TopRatedSelection orderById() {
+    public TopratedSelection orderById() {
         return orderById(false);
     }
 
-    public TopRatedSelection title(String... value) {
-        addEquals(TopRatedColumns.TITLE, value);
+    public TopratedSelection title(String... value) {
+        addEquals(TopratedColumns.TITLE, value);
         return this;
     }
 
-    public TopRatedSelection titleNot(String... value) {
-        addNotEquals(TopRatedColumns.TITLE, value);
+    public TopratedSelection titleNot(String... value) {
+        addNotEquals(TopratedColumns.TITLE, value);
         return this;
     }
 
-    public TopRatedSelection titleLike(String... value) {
-        addLike(TopRatedColumns.TITLE, value);
+    public TopratedSelection titleLike(String... value) {
+        addLike(TopratedColumns.TITLE, value);
         return this;
     }
 
-    public TopRatedSelection titleContains(String... value) {
-        addContains(TopRatedColumns.TITLE, value);
+    public TopratedSelection titleContains(String... value) {
+        addContains(TopratedColumns.TITLE, value);
         return this;
     }
 
-    public TopRatedSelection titleStartsWith(String... value) {
-        addStartsWith(TopRatedColumns.TITLE, value);
+    public TopratedSelection titleStartsWith(String... value) {
+        addStartsWith(TopratedColumns.TITLE, value);
         return this;
     }
 
-    public TopRatedSelection titleEndsWith(String... value) {
-        addEndsWith(TopRatedColumns.TITLE, value);
+    public TopratedSelection titleEndsWith(String... value) {
+        addEndsWith(TopratedColumns.TITLE, value);
         return this;
     }
 
-    public TopRatedSelection orderByTitle(boolean desc) {
-        orderBy(TopRatedColumns.TITLE, desc);
+    public TopratedSelection orderByTitle(boolean desc) {
+        orderBy(TopratedColumns.TITLE, desc);
         return this;
     }
 
-    public TopRatedSelection orderByTitle() {
-        orderBy(TopRatedColumns.TITLE, false);
+    public TopratedSelection orderByTitle() {
+        orderBy(TopratedColumns.TITLE, false);
         return this;
     }
 
-    public TopRatedSelection releaseDate(String... value) {
-        addEquals(TopRatedColumns.RELEASE_DATE, value);
+    public TopratedSelection releaseDate(String... value) {
+        addEquals(TopratedColumns.RELEASE_DATE, value);
         return this;
     }
 
-    public TopRatedSelection releaseDateNot(String... value) {
-        addNotEquals(TopRatedColumns.RELEASE_DATE, value);
+    public TopratedSelection releaseDateNot(String... value) {
+        addNotEquals(TopratedColumns.RELEASE_DATE, value);
         return this;
     }
 
-    public TopRatedSelection releaseDateLike(String... value) {
-        addLike(TopRatedColumns.RELEASE_DATE, value);
+    public TopratedSelection releaseDateLike(String... value) {
+        addLike(TopratedColumns.RELEASE_DATE, value);
         return this;
     }
 
-    public TopRatedSelection releaseDateContains(String... value) {
-        addContains(TopRatedColumns.RELEASE_DATE, value);
+    public TopratedSelection releaseDateContains(String... value) {
+        addContains(TopratedColumns.RELEASE_DATE, value);
         return this;
     }
 
-    public TopRatedSelection releaseDateStartsWith(String... value) {
-        addStartsWith(TopRatedColumns.RELEASE_DATE, value);
+    public TopratedSelection releaseDateStartsWith(String... value) {
+        addStartsWith(TopratedColumns.RELEASE_DATE, value);
         return this;
     }
 
-    public TopRatedSelection releaseDateEndsWith(String... value) {
-        addEndsWith(TopRatedColumns.RELEASE_DATE, value);
+    public TopratedSelection releaseDateEndsWith(String... value) {
+        addEndsWith(TopratedColumns.RELEASE_DATE, value);
         return this;
     }
 
-    public TopRatedSelection orderByReleaseDate(boolean desc) {
-        orderBy(TopRatedColumns.RELEASE_DATE, desc);
+    public TopratedSelection orderByReleaseDate(boolean desc) {
+        orderBy(TopratedColumns.RELEASE_DATE, desc);
         return this;
     }
 
-    public TopRatedSelection orderByReleaseDate() {
-        orderBy(TopRatedColumns.RELEASE_DATE, false);
+    public TopratedSelection orderByReleaseDate() {
+        orderBy(TopratedColumns.RELEASE_DATE, false);
         return this;
     }
 
-    public TopRatedSelection popularity(Double... value) {
-        addEquals(TopRatedColumns.POPULARITY, value);
+    public TopratedSelection popularity(Double... value) {
+        addEquals(TopratedColumns.POPULARITY, value);
         return this;
     }
 
-    public TopRatedSelection popularityNot(Double... value) {
-        addNotEquals(TopRatedColumns.POPULARITY, value);
+    public TopratedSelection popularityNot(Double... value) {
+        addNotEquals(TopratedColumns.POPULARITY, value);
         return this;
     }
 
-    public TopRatedSelection popularityGt(double value) {
-        addGreaterThan(TopRatedColumns.POPULARITY, value);
+    public TopratedSelection popularityGt(double value) {
+        addGreaterThan(TopratedColumns.POPULARITY, value);
         return this;
     }
 
-    public TopRatedSelection popularityGtEq(double value) {
-        addGreaterThanOrEquals(TopRatedColumns.POPULARITY, value);
+    public TopratedSelection popularityGtEq(double value) {
+        addGreaterThanOrEquals(TopratedColumns.POPULARITY, value);
         return this;
     }
 
-    public TopRatedSelection popularityLt(double value) {
-        addLessThan(TopRatedColumns.POPULARITY, value);
+    public TopratedSelection popularityLt(double value) {
+        addLessThan(TopratedColumns.POPULARITY, value);
         return this;
     }
 
-    public TopRatedSelection popularityLtEq(double value) {
-        addLessThanOrEquals(TopRatedColumns.POPULARITY, value);
+    public TopratedSelection popularityLtEq(double value) {
+        addLessThanOrEquals(TopratedColumns.POPULARITY, value);
         return this;
     }
 
-    public TopRatedSelection orderByPopularity(boolean desc) {
-        orderBy(TopRatedColumns.POPULARITY, desc);
+    public TopratedSelection orderByPopularity(boolean desc) {
+        orderBy(TopratedColumns.POPULARITY, desc);
         return this;
     }
 
-    public TopRatedSelection orderByPopularity() {
-        orderBy(TopRatedColumns.POPULARITY, false);
+    public TopratedSelection orderByPopularity() {
+        orderBy(TopratedColumns.POPULARITY, false);
         return this;
     }
 
-    public TopRatedSelection posterPath(String... value) {
-        addEquals(TopRatedColumns.POSTER_PATH, value);
+    public TopratedSelection posterPath(String... value) {
+        addEquals(TopratedColumns.POSTER_PATH, value);
         return this;
     }
 
-    public TopRatedSelection posterPathNot(String... value) {
-        addNotEquals(TopRatedColumns.POSTER_PATH, value);
+    public TopratedSelection posterPathNot(String... value) {
+        addNotEquals(TopratedColumns.POSTER_PATH, value);
         return this;
     }
 
-    public TopRatedSelection posterPathLike(String... value) {
-        addLike(TopRatedColumns.POSTER_PATH, value);
+    public TopratedSelection posterPathLike(String... value) {
+        addLike(TopratedColumns.POSTER_PATH, value);
         return this;
     }
 
-    public TopRatedSelection posterPathContains(String... value) {
-        addContains(TopRatedColumns.POSTER_PATH, value);
+    public TopratedSelection posterPathContains(String... value) {
+        addContains(TopratedColumns.POSTER_PATH, value);
         return this;
     }
 
-    public TopRatedSelection posterPathStartsWith(String... value) {
-        addStartsWith(TopRatedColumns.POSTER_PATH, value);
+    public TopratedSelection posterPathStartsWith(String... value) {
+        addStartsWith(TopratedColumns.POSTER_PATH, value);
         return this;
     }
 
-    public TopRatedSelection posterPathEndsWith(String... value) {
-        addEndsWith(TopRatedColumns.POSTER_PATH, value);
+    public TopratedSelection posterPathEndsWith(String... value) {
+        addEndsWith(TopratedColumns.POSTER_PATH, value);
         return this;
     }
 
-    public TopRatedSelection orderByPosterPath(boolean desc) {
-        orderBy(TopRatedColumns.POSTER_PATH, desc);
+    public TopratedSelection orderByPosterPath(boolean desc) {
+        orderBy(TopratedColumns.POSTER_PATH, desc);
         return this;
     }
 
-    public TopRatedSelection orderByPosterPath() {
-        orderBy(TopRatedColumns.POSTER_PATH, false);
+    public TopratedSelection orderByPosterPath() {
+        orderBy(TopratedColumns.POSTER_PATH, false);
         return this;
     }
 
-    public TopRatedSelection synopsis(String... value) {
-        addEquals(TopRatedColumns.SYNOPSIS, value);
+    public TopratedSelection synopsis(String... value) {
+        addEquals(TopratedColumns.SYNOPSIS, value);
         return this;
     }
 
-    public TopRatedSelection synopsisNot(String... value) {
-        addNotEquals(TopRatedColumns.SYNOPSIS, value);
+    public TopratedSelection synopsisNot(String... value) {
+        addNotEquals(TopratedColumns.SYNOPSIS, value);
         return this;
     }
 
-    public TopRatedSelection synopsisLike(String... value) {
-        addLike(TopRatedColumns.SYNOPSIS, value);
+    public TopratedSelection synopsisLike(String... value) {
+        addLike(TopratedColumns.SYNOPSIS, value);
         return this;
     }
 
-    public TopRatedSelection synopsisContains(String... value) {
-        addContains(TopRatedColumns.SYNOPSIS, value);
+    public TopratedSelection synopsisContains(String... value) {
+        addContains(TopratedColumns.SYNOPSIS, value);
         return this;
     }
 
-    public TopRatedSelection synopsisStartsWith(String... value) {
-        addStartsWith(TopRatedColumns.SYNOPSIS, value);
+    public TopratedSelection synopsisStartsWith(String... value) {
+        addStartsWith(TopratedColumns.SYNOPSIS, value);
         return this;
     }
 
-    public TopRatedSelection synopsisEndsWith(String... value) {
-        addEndsWith(TopRatedColumns.SYNOPSIS, value);
+    public TopratedSelection synopsisEndsWith(String... value) {
+        addEndsWith(TopratedColumns.SYNOPSIS, value);
         return this;
     }
 
-    public TopRatedSelection orderBySynopsis(boolean desc) {
-        orderBy(TopRatedColumns.SYNOPSIS, desc);
+    public TopratedSelection orderBySynopsis(boolean desc) {
+        orderBy(TopratedColumns.SYNOPSIS, desc);
         return this;
     }
 
-    public TopRatedSelection orderBySynopsis() {
-        orderBy(TopRatedColumns.SYNOPSIS, false);
+    public TopratedSelection orderBySynopsis() {
+        orderBy(TopratedColumns.SYNOPSIS, false);
         return this;
     }
 }

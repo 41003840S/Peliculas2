@@ -1,6 +1,8 @@
 package com.example.manuel.peliculas;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Html;
@@ -11,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.manuel.peliculas.provider.populars.PopularColumns;
-import com.example.manuel.peliculas.provider.populars.PopularCursor;
+
+import com.example.manuel.peliculas.provider.popular.PopularColumns;
+import com.example.manuel.peliculas.provider.popular.PopularCursor;
+import com.example.manuel.peliculas.provider.toprated.TopratedColumns;
+import com.example.manuel.peliculas.provider.toprated.TopratedCursor;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -26,13 +31,12 @@ public class DetailActivityFragment extends Fragment {
     TextView tvTitle, tvSynopsis, tvCriticsScore;
     LinearLayout llTitleScores;
     DecimalFormat decimal = new DecimalFormat("#.#");
-
+    Cursor cursor;
     public DetailActivityFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_detail, container, false);
 
@@ -47,39 +51,45 @@ public class DetailActivityFragment extends Fragment {
 
         //Recogemos el intent con la id de la pelicula
         Long movie_id = getActivity().getIntent().getLongExtra("movie_id", -1);
-        Cursor cursor = getContext().getContentResolver().query(
-                PopularColumns.CONTENT_URI,
-                null,
-                PopularColumns._ID + " = ?",
-                new String[]{String.valueOf(movie_id)},
-                null
-        );
 
-        PopularCursor moviesCursor = new PopularCursor(cursor);
-        moviesCursor.moveToNext();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        tvTitle.setText(moviesCursor.getTitle());
-        tvCriticsScore.setText(
-                Html.fromHtml("<b>Critics Score:</b> " +
-                        decimal.format(moviesCursor.getPopularity()) + "%")
-        );
+        if (preferences.getString("category_list","0").equals("0")){
+            cursor = getContext().getContentResolver().query(
+                    PopularColumns.CONTENT_URI,
+                    null,
+                    PopularColumns._ID + " = ?",
+                    new String[]{String.valueOf(movie_id)},
+                    null);
+            PopularCursor popularCursor = new PopularCursor(cursor);
+            cursor.moveToNext();
+            tvTitle.setText(popularCursor.getTitle());
+            tvSynopsis.setText(Html.fromHtml("<b>Synopsis:</b> " + popularCursor.getSynopsis()));
+            tvCriticsScore.setText(
+                    Html.fromHtml("<b>Critics Score:</b> " +
+                            decimal.format(popularCursor.getPopularity()) + "%")
+            );
+            Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + popularCursor.getPosterPath()).fit().into(ivPosterImage);
 
 
-        tvSynopsis.setText(Html.fromHtml("<b>Synopsis:</b> " + moviesCursor.getSynopsis()));
+        }else if (preferences.getString("category_list","0").equals("1")) {
+            cursor = getContext().getContentResolver().query(
+                    TopratedColumns.CONTENT_URI,
+                    null,
+                    TopratedColumns._ID + " = ?",
+                    new String[]{String.valueOf(movie_id)},
+                    null);
+            TopratedCursor topratedCursor = new TopratedCursor(cursor);
+            cursor.moveToNext();
+            tvTitle.setText(topratedCursor.getTitle());
+            tvSynopsis.setText(Html.fromHtml("<b>Synopsis:</b> " + topratedCursor.getSynopsis()));
+            tvCriticsScore.setText(
+                    Html.fromHtml("<b>Critics Score:</b> " +
+                            decimal.format(topratedCursor.getPopularity()) + "%")
+            );
+            Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + topratedCursor.getPosterPath()).fit().into(ivPosterImage);
 
-
-        Picasso.with(getContext()).load(POSTERURL + POSTERSIZE + moviesCursor.getPosterPath()).fit().centerCrop().into(ivPosterImage);
-
-        /*Picasso.with(getContext())
-                .load(moviesCursor.getPosterPath())
-                .fit()
-                .centerInside()
-                .into(ivPosterImage, PicassoPalette.with(moviesCursor.getPosterPath(), ivPosterImage)
-                        .use(PicassoPalette.Profile.MUTED_LIGHT)
-                        .intoBackground(llTitleScores)
-                        .intoTextColor(tvTitle)
-                        .intoTextColor(tvSynopsis)
-                        .intoTextColor(tvCriticsScore));*/
+        }
 
         return view;
     }

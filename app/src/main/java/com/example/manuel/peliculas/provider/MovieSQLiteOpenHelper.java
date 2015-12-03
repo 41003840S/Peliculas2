@@ -10,7 +10,8 @@ import android.os.Build;
 import android.util.Log;
 
 import com.example.manuel.peliculas.BuildConfig;
-import com.example.manuel.peliculas.provider.populars.PopularColumns;
+import com.example.manuel.peliculas.provider.popular.PopularColumns;
+import com.example.manuel.peliculas.provider.toprated.TopratedColumns;
 
 public class MovieSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = MovieSQLiteOpenHelper.class.getSimpleName();
@@ -22,7 +23,7 @@ public class MovieSQLiteOpenHelper extends SQLiteOpenHelper {
     private final MovieSQLiteOpenHelperCallbacks mOpenHelperCallbacks;
 
     // @formatter:off
-    public static final String SQL_CREATE_TABLE_MOVIES = "CREATE TABLE IF NOT EXISTS "
+    public static final String SQL_CREATE_TABLE_POPULAR = "CREATE TABLE IF NOT EXISTS "
             + PopularColumns.TABLE_NAME + " ( "
             + PopularColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PopularColumns.TITLE + " TEXT, "
@@ -30,6 +31,16 @@ public class MovieSQLiteOpenHelper extends SQLiteOpenHelper {
             + PopularColumns.POPULARITY + " REAL, "
             + PopularColumns.POSTER_PATH + " TEXT, "
             + PopularColumns.SYNOPSIS + " TEXT "
+            + " );";
+
+    public static final String SQL_CREATE_TABLE_TOPRATED = "CREATE TABLE IF NOT EXISTS "
+            + TopratedColumns.TABLE_NAME + " ( "
+            + TopratedColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + TopratedColumns.TITLE + " TEXT, "
+            + TopratedColumns.RELEASE_DATE + " TEXT, "
+            + TopratedColumns.POPULARITY + " REAL, "
+            + TopratedColumns.POSTER_PATH + " TEXT, "
+            + TopratedColumns.SYNOPSIS + " TEXT "
             + " );";
 
     // @formatter:on
@@ -86,7 +97,8 @@ public class MovieSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         if (BuildConfig.DEBUG) Log.d(TAG, "onCreate");
         mOpenHelperCallbacks.onPreCreate(mContext, db);
-        db.execSQL(SQL_CREATE_TABLE_MOVIES);
+        db.execSQL(SQL_CREATE_TABLE_POPULAR);
+        db.execSQL(SQL_CREATE_TABLE_TOPRATED);
         mOpenHelperCallbacks.onPostCreate(mContext, db);
     }
 

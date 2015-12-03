@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.example.manuel.peliculas.provider.populars.PopularColumns;
+
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
-public class GridAdapterDB extends SimpleCursorAdapter{
+public class GridAdapterDB extends SimpleCursorAdapter {
 
     final private String POSTERURL = "http://image.tmdb.org/t/p/";
     final private String POSTERSIZE = "w185";
@@ -25,21 +25,21 @@ public class GridAdapterDB extends SimpleCursorAdapter{
     ImageView iv_PosterImage;
     TextView tv_Titulo;
     Context context;
-    String [] from;
+    public String[] from;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public GridAdapterDB(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);
         this.context = context;
+        this.from=from;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+    public View getView(int position, View convertView, ViewGroup parent) {
         Cursor myCursor = getCursor();
         myCursor.moveToPosition(position);
 
-        if (convertView == null){
+        if (convertView == null) {
 
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.gridview_layout, parent, false);
@@ -60,6 +60,6 @@ public class GridAdapterDB extends SimpleCursorAdapter{
     }
 
     public void setFrom(String[] from) {
-        this.from=from;
+        this.from = from;
     }
 }

@@ -3,12 +3,13 @@ package com.example.manuel.peliculas;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.manuel.peliculas.popularmovies.List;
-import com.example.manuel.peliculas.popularmovies.Result;
-import com.example.manuel.peliculas.provider.populars.PopularColumns;
-import com.example.manuel.peliculas.provider.populars.PopularContentValues;
-import com.example.manuel.peliculas.provider.toprated.TopRatedColumns;
-import com.example.manuel.peliculas.provider.toprated.TopRatedContentValues;
+import com.example.manuel.peliculas.provider.popular.PopularColumns;
+import com.example.manuel.peliculas.provider.popular.PopularContentValues;
+import com.example.manuel.peliculas.provider.toprated.TopratedColumns;
+import com.example.manuel.peliculas.provider.toprated.TopratedContentValues;
+import com.example.manuel.peliculas.retrofit.List;
+import com.example.manuel.peliculas.retrofit.Result;
+
 
 import java.util.Arrays;
 import retrofit.Call;
@@ -98,14 +99,14 @@ public class ApiMovie {
 
                 for (Result movie : film.getResults())
                 {
-                    TopRatedContentValues valores = new TopRatedContentValues();
+                    TopratedContentValues valores = new TopratedContentValues();
 
                     valores.putTitle(movie.getTitle().toString());
                     valores.putReleaseDate(movie.getReleaseDate().toString());
                     valores.putPopularity(movie.getPopularity());
                     valores.putSynopsis(movie.getOverview().toString());
                     valores.putPosterPath(movie.getPosterPath().toString());
-                    context.getContentResolver().insert(TopRatedColumns.CONTENT_URI, valores.values());
+                    context.getContentResolver().insert(TopratedColumns.CONTENT_URI, valores.values());
                 }
             }
 

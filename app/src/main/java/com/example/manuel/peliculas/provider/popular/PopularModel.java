@@ -1,11 +1,14 @@
-package com.example.manuel.peliculas.provider.populars;
+package com.example.manuel.peliculas.provider.popular;
 
 import com.example.manuel.peliculas.provider.base.BaseModel;
 
+import java.util.Date;
+
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
- * Data model for the {@code movies} table.
+ * Data model for the {@code popular} table.
  */
 public interface PopularModel extends BaseModel {
 

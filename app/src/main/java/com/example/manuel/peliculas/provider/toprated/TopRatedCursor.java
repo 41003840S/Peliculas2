@@ -1,15 +1,18 @@
 package com.example.manuel.peliculas.provider.toprated;
 
+import java.util.Date;
+
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.manuel.peliculas.provider.base.AbstractCursor;
 
 /**
- * Cursor wrapper for the {@code movies} table.
+ * Cursor wrapper for the {@code toprated} table.
  */
-public class TopRatedCursor extends AbstractCursor implements TopRatedModel {
-    public TopRatedCursor(Cursor cursor) {
+public class TopratedCursor extends AbstractCursor implements TopratedModel {
+    public TopratedCursor(Cursor cursor) {
         super(cursor);
     }
 
@@ -17,7 +20,7 @@ public class TopRatedCursor extends AbstractCursor implements TopRatedModel {
      * Primary key.
      */
     public long getId() {
-        Long res = getLongOrNull(TopRatedColumns._ID);
+        Long res = getLongOrNull(TopratedColumns._ID);
         if (res == null)
             throw new NullPointerException("The value of '_id' in the database was null, which is not allowed according to the model definition");
         return res;
@@ -29,7 +32,7 @@ public class TopRatedCursor extends AbstractCursor implements TopRatedModel {
      */
     @Nullable
     public String getTitle() {
-        String res = getStringOrNull(TopRatedColumns.TITLE);
+        String res = getStringOrNull(TopratedColumns.TITLE);
         return res;
     }
 
@@ -39,7 +42,7 @@ public class TopRatedCursor extends AbstractCursor implements TopRatedModel {
      */
     @Nullable
     public String getReleaseDate() {
-        String res = getStringOrNull(TopRatedColumns.RELEASE_DATE);
+        String res = getStringOrNull(TopratedColumns.RELEASE_DATE);
         return res;
     }
 
@@ -49,7 +52,7 @@ public class TopRatedCursor extends AbstractCursor implements TopRatedModel {
      */
     @Nullable
     public Double getPopularity() {
-        Double res = getDoubleOrNull(TopRatedColumns.POPULARITY);
+        Double res = getDoubleOrNull(TopratedColumns.POPULARITY);
         return res;
     }
 
@@ -59,7 +62,7 @@ public class TopRatedCursor extends AbstractCursor implements TopRatedModel {
      */
     @Nullable
     public String getPosterPath() {
-        String res = getStringOrNull(TopRatedColumns.POSTER_PATH);
+        String res = getStringOrNull(TopratedColumns.POSTER_PATH);
         return res;
     }
 
@@ -69,7 +72,7 @@ public class TopRatedCursor extends AbstractCursor implements TopRatedModel {
      */
     @Nullable
     public String getSynopsis() {
-        String res = getStringOrNull(TopRatedColumns.SYNOPSIS);
+        String res = getStringOrNull(TopratedColumns.SYNOPSIS);
         return res;
     }
 }

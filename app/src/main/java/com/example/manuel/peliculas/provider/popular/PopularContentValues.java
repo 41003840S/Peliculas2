@@ -1,14 +1,17 @@
-package com.example.manuel.peliculas.provider.populars;
+package com.example.manuel.peliculas.provider.popular;
+
+import java.util.Date;
 
 import android.content.Context;
 import android.content.ContentResolver;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.manuel.peliculas.provider.base.AbstractContentValues;
 
 /**
- * Content values wrapper for the {@code movies} table.
+ * Content values wrapper for the {@code popular} table.
  */
 public class PopularContentValues extends AbstractContentValues {
     @Override

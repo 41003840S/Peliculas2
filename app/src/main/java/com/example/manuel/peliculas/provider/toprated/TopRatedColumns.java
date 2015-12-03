@@ -4,12 +4,14 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 import com.example.manuel.peliculas.provider.MovieProvider;
+import com.example.manuel.peliculas.provider.popular.PopularColumns;
+import com.example.manuel.peliculas.provider.toprated.TopratedColumns;
 
 /**
- * Columns for the {@code movies} table.
+ * Columns for the {@code toprated} table.
  */
-public class TopRatedColumns implements BaseColumns {
-    public static final String TABLE_NAME = "movies";
+public class TopratedColumns implements BaseColumns {
+    public static final String TABLE_NAME = "toprated";
     public static final Uri CONTENT_URI = Uri.parse(MovieProvider.CONTENT_URI_BASE + "/" + TABLE_NAME);
 
     /**

@@ -1,15 +1,17 @@
-package com.example.manuel.peliculas.provider.populars;
+package com.example.manuel.peliculas.provider.popular;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
 
 import com.example.manuel.peliculas.provider.MovieProvider;
+import com.example.manuel.peliculas.provider.popular.PopularColumns;
+import com.example.manuel.peliculas.provider.toprated.TopratedColumns;
 
 /**
- * Columns for the {@code movies} table.
+ * Columns for the {@code popular} table.
  */
 public class PopularColumns implements BaseColumns {
-    public static final String TABLE_NAME = "movies";
+    public static final String TABLE_NAME = "popular";
     public static final Uri CONTENT_URI = Uri.parse(MovieProvider.CONTENT_URI_BASE + "/" + TABLE_NAME);
 
     /**

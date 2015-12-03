@@ -18,15 +18,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.example.manuel.peliculas.provider.populars.PopularColumns;
-import com.example.manuel.peliculas.provider.toprated.TopRatedColumns;
-
+import com.example.manuel.peliculas.provider.popular.PopularColumns;
+import com.example.manuel.peliculas.provider.toprated.TopratedColumns;
 
 
 public class MainActivityFragment extends Fragment implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>{
 
     GridView gridPeliculas;
     GridAdapterDB gridAdapterDB;
+    SharedPreferences preferences;
 
     public MainActivityFragment(){
     }
@@ -36,15 +36,15 @@ public class MainActivityFragment extends Fragment implements android.support.v4
     public void onStart() {
         super.onStart();
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         if (preferences.getString("category_list","0").equals("0")){
            getLoaderManager().restartLoader(0, null, this);
-           //GridAdapterDB.setFrom(new String[]{PopularColumns.TITLE, PopularColumns.POSTER_PATH});
+           gridAdapterDB.setFrom(new String[]{PopularColumns.TITLE, PopularColumns.POSTER_PATH});
 
         }else if (preferences.getString("category_list","0").equals("1")) {
             getLoaderManager().restartLoader(0, null, this);
-            //GridAdapterDB.setFrom(new String[]{TopRatedColumns.TITLE, TopRatedColumns.POSTER_PATH});
+            gridAdapterDB.setFrom(new String[]{TopratedColumns.TITLE, TopratedColumns.POSTER_PATH});
         }
     }
 
@@ -56,10 +56,12 @@ public class MainActivityFragment extends Fragment implements android.support.v4
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View fragment = inflater.inflate(R.layout.fragment_main, container, false);
+
+        //Inicializamos el Loader
+        getLoaderManager().initLoader(0, null, this);
 
         //Enlazamos el GridView
         gridPeliculas = (GridView) fragment.findViewById(R.id.gridView);
@@ -77,8 +79,7 @@ public class MainActivityFragment extends Fragment implements android.support.v4
                 },
                 0);
 
-        //Inicializamos el Loader
-        getLoaderManager().initLoader(0, null, this);
+
 
         //Seteamos el GridView con el adaptador
         gridPeliculas.setAdapter(gridAdapterDB);
@@ -140,7 +141,7 @@ public class MainActivityFragment extends Fragment implements android.support.v4
                 null,
                 null);
         getContext().getContentResolver().delete(
-                TopRatedColumns.CONTENT_URI,
+                TopratedColumns.CONTENT_URI,
                 null,
                 null);
 
@@ -152,30 +153,33 @@ public class MainActivityFragment extends Fragment implements android.support.v4
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         //Segun la Setting Preference que elijamos invocara un metodo u otro
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        if (preferences.getString("category_list","0").equals("0")){
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        if (preferences.getString("category_list", "0").equals("0")) {
             return new CursorLoader(getContext(),
                     PopularColumns.CONTENT_URI,
                     null,
                     null,
                     null,
                     "_id");
-        }else if (preferences.getString("category_list","0").equals("1")) {
+        }
+        else if (preferences.getString("category_list", "0").equals("1"))
+        {
             return new CursorLoader(getContext(),
-                    TopRatedColumns.CONTENT_URI,
+                    TopratedColumns.CONTENT_URI,
                     null,
                     null,
                     null,
                     "_id");
-        }else{
-            return null;
         }
+        return null;
 
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         gridAdapterDB.swapCursor(data);
+
     }
 
     @Override
@@ -184,9 +188,8 @@ public class MainActivityFragment extends Fragment implements android.support.v4
     }
 
 
-
-
     class RefreshBackground extends AsyncTask {
+
         @Override
         protected Object doInBackground(Object[] params) {
 

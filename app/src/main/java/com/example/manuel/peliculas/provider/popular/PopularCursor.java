@@ -1,12 +1,15 @@
-package com.example.manuel.peliculas.provider.populars;
+package com.example.manuel.peliculas.provider.popular;
+
+import java.util.Date;
 
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.manuel.peliculas.provider.base.AbstractCursor;
 
 /**
- * Cursor wrapper for the {@code movies} table.
+ * Cursor wrapper for the {@code popular} table.
  */
 public class PopularCursor extends AbstractCursor implements PopularModel {
     public PopularCursor(Cursor cursor) {

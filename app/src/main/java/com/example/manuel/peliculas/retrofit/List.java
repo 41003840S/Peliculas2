@@ -1,4 +1,4 @@
-package com.example.manuel.peliculas.popularmovies;
+package com.example.manuel.peliculas.retrofit;
 
 import java.util.ArrayList;
 import com.google.gson.annotations.Expose;

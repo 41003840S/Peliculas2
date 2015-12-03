@@ -1,5 +1,5 @@
 
-package com.example.manuel.peliculas.popularmovies;
+package com.example.manuel.peliculas.retrofit;
 
 import java.io.Serializable;
 import java.util.ArrayList;

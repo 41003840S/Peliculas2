@@ -1,13 +1,16 @@
 package com.example.manuel.peliculas.provider.toprated;
 
-import android.support.annotation.Nullable;
-
 import com.example.manuel.peliculas.provider.base.BaseModel;
 
+import java.util.Date;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
- * Data model for the {@code movies} table.
+ * Data model for the {@code toprated} table.
  */
-public interface TopRatedModel extends BaseModel {
+public interface TopratedModel extends BaseModel {
 
     /**
      * Get the {@code title} value.

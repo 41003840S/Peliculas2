@@ -1,4 +1,6 @@
-package com.example.manuel.peliculas.provider.populars;
+package com.example.manuel.peliculas.provider.popular;
+
+import java.util.Date;
 
 import android.content.Context;
 import android.content.ContentResolver;
@@ -8,7 +10,7 @@ import android.net.Uri;
 import com.example.manuel.peliculas.provider.base.AbstractSelection;
 
 /**
- * Selection for the {@code movies} table.
+ * Selection for the {@code popular} table.
  */
 public class PopularSelection extends AbstractSelection<PopularSelection> {
     @Override
@@ -21,7 +23,7 @@ public class PopularSelection extends AbstractSelection<PopularSelection> {
      *
      * @param contentResolver The content resolver to query.
      * @param projection A list of which columns to return. Passing null will return all columns, which is inefficient.
-     * @return A {@code TopRatedCursor} object, which is positioned before the first entry, or null.
+     * @return A {@code PopularCursor} object, which is positioned before the first entry, or null.
      */
     public PopularCursor query(ContentResolver contentResolver, String[] projection) {
         Cursor cursor = contentResolver.query(uri(), projection, sel(), args(), order());
@@ -41,7 +43,7 @@ public class PopularSelection extends AbstractSelection<PopularSelection> {
      *
      * @param context The context to use for the query.
      * @param projection A list of which columns to return. Passing null will return all columns, which is inefficient.
-     * @return A {@code TopRatedCursor} object, which is positioned before the first entry, or null.
+     * @return A {@code PopularCursor} object, which is positioned before the first entry, or null.
      */
     public PopularCursor query(Context context, String[] projection) {
         Cursor cursor = context.getContentResolver().query(uri(), projection, sel(), args(), order());
@@ -58,17 +60,17 @@ public class PopularSelection extends AbstractSelection<PopularSelection> {
 
 
     public PopularSelection id(long... value) {
-        addEquals("movies." + PopularColumns._ID, toObjectArray(value));
+        addEquals("popular." + PopularColumns._ID, toObjectArray(value));
         return this;
     }
 
     public PopularSelection idNot(long... value) {
-        addNotEquals("movies." + PopularColumns._ID, toObjectArray(value));
+        addNotEquals("popular." + PopularColumns._ID, toObjectArray(value));
         return this;
     }
 
     public PopularSelection orderById(boolean desc) {
-        orderBy("movies." + PopularColumns._ID, desc);
+        orderBy("popular." + PopularColumns._ID, desc);
         return this;
     }
 
